@@ -69,7 +69,7 @@ const login = async () => {
       role: res.data.role
     }))
 
-    router.push('/dashboard')
+    router.push('/provider/dashboard')
   } catch (err: any) {
     alert(err.response?.data || 'Invalid email or password')
   } finally {

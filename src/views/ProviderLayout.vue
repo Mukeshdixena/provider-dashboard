@@ -35,12 +35,6 @@
                     <i class="bi bi-currency-rupee"></i> Earnings
                 </router-link>
             </nav>
-
-            <div class="p-3 border-top">
-                <button @click="logout" class="btn btn-outline-danger w-100 rounded-pill">
-                    <i class="bi bi-box-arrow-right"></i> Logout
-                </button>
-            </div>
         </div>
 
         <div class="flex-grow-1 d-flex flex-column">
@@ -104,7 +98,7 @@ const currentPageTitle = computed(() => {
 const logout = () => {
     localStorage.removeItem('provider_token')
     localStorage.removeItem('provider')
-    router.push('/login')
+    router.push('/')
 }
 </script>
 
