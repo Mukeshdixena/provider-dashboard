@@ -1,6 +1,9 @@
 <template>
-    <div class="d-flex min-vh-100 bg-light">
-        <div class="bg-white shadow-sm border-end d-flex flex-column" style="width: 280px;">
+    <div class="bg-light">
+
+        <!-- FIXED SIDEBAR -->
+        <div class="sidebar bg-white shadow-sm border-end d-flex flex-column position-fixed h-100 overflow-auto"
+            style="width: 280px;">
             <div class="p-4 border-bottom">
                 <h4 class="fw-bold text-pink mb-1">
                     <i class="bi bi-shop-window"></i> {{ salonName }}
@@ -14,21 +17,25 @@
                     active-class="bg-pink bg-opacity-10 text-pink fw-bold">
                     <i class="bi bi-speedometer2"></i> Dashboard
                 </router-link>
+
                 <router-link to="/provider/queue"
                     class="nav-link py-3 px-4 rounded-3 mb-2 d-flex align-items-center gap-3"
                     active-class="bg-pink bg-opacity-10 text-pink fw-bold">
                     <i class="bi bi-people-fill"></i> Today's Queue
                 </router-link>
+
                 <router-link to="/provider/services"
                     class="nav-link py-3 px-4 rounded-3 mb-2 d-flex align-items-center gap-3"
                     active-class="bg-pink bg-opacity-10 text-pink fw-bold">
                     <i class="bi bi-scissors"></i> Services
                 </router-link>
+
                 <router-link to="/provider/bookings"
                     class="nav-link py-3 px-4 rounded-3 mb-2 d-flex align-items-center gap-3"
                     active-class="bg-pink bg-opacity-10 text-pink fw-bold">
                     <i class="bi bi-calendar-check"></i> All Bookings
                 </router-link>
+
                 <router-link to="/provider/earnings"
                     class="nav-link py-3 px-4 rounded-3 mb-2 d-flex align-items-center gap-3"
                     active-class="bg-pink bg-opacity-10 text-pink fw-bold">
@@ -37,8 +44,11 @@
             </nav>
         </div>
 
-        <div class="flex-grow-1 d-flex flex-column">
-            <nav class="navbar bg-white shadow-sm sticky-top border-bottom">
+        <!-- RIGHT SIDE -->
+        <div class="ms-sidebar">
+
+            <!-- FIXED TOP NAVBAR -->
+            <nav class="navbar bg-white shadow-sm border-bottom position-fixed top-0 end-0 w-100 header-fixed">
                 <div class="container-fluid px-4">
                     <span class="navbar-text fw-bold text-dark fs-5">
                         {{ currentPageTitle }}
@@ -71,10 +81,15 @@
                 </div>
             </nav>
 
-            <main class="flex-grow-1 p-4 p-md-5">
-                <router-view />
-            </main>
+            <!-- PAGE SCROLL AREA -->
+            <div class="content-scroll-area">
+                <main class="p-4 p-md-5">
+                    <router-view />
+                </main>
+            </div>
+
         </div>
+
     </div>
 </template>
 
@@ -103,6 +118,25 @@ const logout = () => {
 </script>
 
 <style scoped>
+/* Sidebar pushes content right */
+.ms-sidebar {
+    margin-left: 280px;
+}
+
+/* Fixed header height */
+.header-fixed {
+    height: 70px;
+    z-index: 1050;
+}
+
+/* Scrollable area BELOW the header */
+.content-scroll-area {
+    margin-top: 70px;
+    height: calc(100vh - 70px);
+    overflow-y: auto;
+}
+
+/* Links */
 .nav-link {
     color: #555 !important;
     transition: all 0.2s;
@@ -113,6 +147,7 @@ const logout = () => {
     color: #333 !important;
 }
 
+/* Theme colors */
 .text-pink {
     color: #ff6bd6;
 }
