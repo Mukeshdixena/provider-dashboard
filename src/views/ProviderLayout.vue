@@ -1,7 +1,5 @@
-<!-- src/views/provider/ProviderLayout.vue → 100% WORKING (NO PINIA) -->
 <template>
     <div class="d-flex min-vh-100 bg-light">
-        <!-- Sidebar -->
         <div class="bg-white shadow-sm border-end d-flex flex-column" style="width: 280px;">
             <div class="p-4 border-bottom">
                 <h4 class="fw-bold text-pink mb-1">
@@ -45,16 +43,36 @@
             </div>
         </div>
 
-        <!-- Main Content -->
         <div class="flex-grow-1 d-flex flex-column">
             <nav class="navbar bg-white shadow-sm sticky-top border-bottom">
                 <div class="container-fluid px-4">
                     <span class="navbar-text fw-bold text-dark fs-5">
                         {{ currentPageTitle }}
                     </span>
-                    <div class="d-flex align-items-center gap-3">
-                        <span class="text-muted small">Welcome,</span>
-                        <strong>{{ userName }}</strong>
+
+                    <div class="dropdown">
+                        <button
+                            class="btn btn-light border rounded-pill px-3 dropdown-toggle d-flex align-items-center gap-2"
+                            type="button" data-bs-toggle="dropdown">
+                            <span class="text-muted small">Welcome,</span>
+                            <strong>{{ userName }}</strong>
+                        </button>
+
+                        <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                            <li>
+                                <button class="dropdown-item" @click="router.push('/provider/profile')">
+                                    <i class="bi bi-person-circle me-2"></i> Profile
+                                </button>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <button class="dropdown-item text-danger" @click="logout">
+                                    <i class="bi bi-box-arrow-right me-2"></i> Logout
+                                </button>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </nav>
@@ -73,7 +91,6 @@ import { useRouter, useRoute } from 'vue-router'
 const router = useRouter()
 const route = useRoute()
 
-// Get user from localStorage (same as login)
 const userData = localStorage.getItem('provider')
 const user = userData ? JSON.parse(userData) : {}
 
